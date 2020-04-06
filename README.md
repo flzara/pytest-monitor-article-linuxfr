@@ -71,8 +71,8 @@ _Happy testing !_
 ----
 > _Fin de l'article et liste de liens qui seront publiés en bas de l'article_
 
-[Projet pytest-mmonitor (dépôt git)](https://github.com/CFMTech/pytest-monitor)
-[pytest-monitor version 1.1.1](https://github.com/CFMTech/pytest-monitor/releases)
-[Documentation de pytest-monitor](https://pytest-monitor.readthedocs.io/en/latest/index.html)
-[Pytest (site web)](https://docs.pytest.org/)
+- [Projet pytest-mmonitor (dépôt git)](https://github.com/CFMTech/pytest-monitor)
+- [pytest-monitor version 1.1.1](https://github.com/CFMTech/pytest-monitor/releases)
+- [Documentation de pytest-monitor](https://pytest-monitor.readthedocs.io/en/latest/index.html)
+- [Pytest (site web)](https://docs.pytest.org/)
 
