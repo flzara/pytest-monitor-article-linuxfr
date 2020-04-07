@@ -53,13 +53,33 @@ Ensuite, _pytest-monitor_ est actif par défaut dès que vous lancez vos (py)tes
 
 
 
-Au premier lancement, une base sqlite est créée dans le répertoire d’exécution. Celle-ci contient deux tables : une pour stocker la définition de l’environnement (Processeur, mémoire disponible, nom de la machine, OS, version de Python, etc.) et la seconde les résultats proprement dit pour chaque exécution (horodatés et reliés à un environnement). Dans une future version, il sera possible de pousser les résultats directement sur un serveur qui pourra les centraliser. La portée des résultats peut se faire au niveau fonction, module, classe ou encore session. De plus, il est possible d’influer sur la manière dont sont surveillés les tests :
+Au premier lancement, une base sqlite est créée dans le répertoire d’exécution. Celle-ci contient deux tables : une pour stocker la définition de l’environnement (Processeur, mémoire disponible, nom de la machine, OS, version de Python, etc.) et la seconde les résultats proprement dit pour chaque exécution (horodatés et reliés à un environnement). Dans une future version, il sera possible de pousser les résultats directement sur un serveur qui pourra les centraliser. La portée des résultats peut se faire au niveau fonction, module, classe ou encore session. De plus, il est possible d’influer sur la manière dont sont surveillés les tests, principalement avec des marqueurs :
 
 
 - Ajout d’une description
 - Désactivation locale (via un commentaire) ou global de la mesure de la performance des tests
 - Paramétrage de certains tests, afin de pouvoir rejouer certaines fonctions avec des jeux de paramètres différents
 
+Voici ce que cela peut donner (exemple issu de la documentation)
+
+```python
+import pytest
+import time
+
+# Tests are run and monitored by default: no boilerplate code needed
+def test_sleep1():
+    time.sleep(1)
+
+# Run as a test, but do not monitor:
+@pytest.mark.monitor_skip_test
+def test_sleep2():
+    time.sleep(2)
+
+# Support for parametrized tests (monitored by default):
+@pytest.mark.parametrize(('range_max', 'other'), [(10, "10"), (100, "100"), (1000, "1000"), (10000, "10000")])
+def test_heavy(range_max, other):
+    assert len(['a' * i for i in range(range_max)]) == range_max
+```
 
 ## Contributions
 Le code source, sous licence MIT, est disponible sur un [dépôt GitHub](https://github.com/CFMTech/pytest-monitor) et son auteur, Jean-Sébastien Dieu, est ouvert aux [contributions externes](https://pytest-monitor.readthedocs.io/en/latest/contributing.html).
