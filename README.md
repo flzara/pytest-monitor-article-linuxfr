@@ -18,7 +18,7 @@ Pour le moment, trois ressources sont surveillées et historisés par cette exte
 
 
 
-Chaque résultat étant attaché à environnement d’exécution, il est facile de comparer l’impact du matériel utilisé pour faire tourner vos tests.
+Chaque résultat étant attaché à un environnement d’exécution, il est facile de comparer l’impact du matériel utilisé pour faire tourner vos tests.
 
 > _Fin du chapeau_
 ----
@@ -51,16 +51,14 @@ Ensuite, _pytest-monitor_ est actif par défaut dès que vous lancez vos (py)tes
 - `psutil` pour l’utilisation processeur ;
 - `memory_profiler` pour la consommmation mémoire.
 
+Certes la prise des mesures aura un impact sur les performances, mais il reste contenu et négligeable par rapport aux tests eux-mêmes.
 
+Au premier lancement, une base sqlite est créée dans le répertoire d’exécution. Celle-ci contient trois tables : une pour stocker la définition de l’environnement (Processeur, mémoire disponible, nom de la machine, OS, version de Python, etc.), une pour la session (job en charge des tests avec horodatage) et la dernière les résultats proprement dit pour chaque mesure (horodatés et reliés à un environnement et à une session). Dans une future version, il sera possible de pousser les résultats directement sur un serveur qui pourra les centraliser. La portée des résultats peut se faire au niveau fonction, module, classe ou encore session. De plus, il est possible d’influer sur la manière dont sont surveillés les tests, principalement avec des marqueurs :
 
-Au premier lancement, une base sqlite est créée dans le répertoire d’exécution. Celle-ci contient deux tables : une pour stocker la définition de l’environnement (Processeur, mémoire disponible, nom de la machine, OS, version de Python, etc.) et la seconde les résultats proprement dit pour chaque exécution (horodatés et reliés à un environnement). Dans une future version, il sera possible de pousser les résultats directement sur un serveur qui pourra les centraliser. La portée des résultats peut se faire au niveau fonction, module, classe ou encore session. De plus, il est possible d’influer sur la manière dont sont surveillés les tests, principalement avec des marqueurs :
-
-
-- Ajout d’une description
-- Désactivation locale (via un commentaire) ou global de la mesure de la performance des tests
+- Désactivation locale (via un commentaire) ou global de la mesure de la performance des tests ;
 - Paramétrage de certains tests, afin de pouvoir rejouer certaines fonctions avec des jeux de paramètres différents
 
-Voici ce que cela peut donner (exemple issu de la documentation)
+Pytest-monitor est très peu intrusif sur les tests, preuve en cet exemple exemple issu de la documentation. Vous n'avez quasiment rien à ajouter pour obtenir des résultats exploitables :
 
 ```python
 import pytest
@@ -82,7 +80,7 @@ def test_heavy(range_max, other):
 ```
 
 ## Contributions
-Le code source, sous licence MIT, est disponible sur un [dépôt GitHub](https://github.com/CFMTech/pytest-monitor) et son auteur, Jean-Sébastien Dieu, est ouvert aux [contributions externes](https://pytest-monitor.readthedocs.io/en/latest/contributing.html).
+Le code source, sous licence MIT, est disponible sur un [dépôt GitHub](https://github.com/CFMTech/pytest-monitor) et son auteur, [Jean-Sébastien Dieu](https://www.linkedin.com/in/jdieu/), est ouvert aux [contributions externes](https://pytest-monitor.readthedocs.io/en/latest/contributing.html).
 
 
 _Happy testing !_
